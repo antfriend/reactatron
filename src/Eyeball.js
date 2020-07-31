@@ -3,53 +3,55 @@ import React from 'react';
     draws an eyeball looking around!
 */
 
-const Eyeball = () => { 
-    const eyeRef = React.useRef();
-    //const myId = eyeRef.current.id;
-    function Offset(n){
-        return 50 + n;
-    }
+class Eyeball extends React.Component {
+     
 
-    function rando() {
-        const min = -9;
-        const max = 9;
-        return Math.floor(Math.random() * (max - min + 1) + min);
+    constructor(props) {
+        super(props)
+        
+        this.state = {
+            x: this.rando(),
+            y: this.rando()
+        };
       }
 
-    function drawAt(x,y){
-        return <svg  height="100" width="100">
-        <circle cx="50" cy="50" r="40" stroke="black" strokeWidth="3" fill="white" />
-        <ellipse cx={Offset(x)} cy={Offset(y)} rx="20" ry="20" stroke="black" strokeWidth="1" fill="red" />
-        <ellipse cx={Offset(x)} cy={Offset(y)}  rx="10" ry="10" stroke="black" strokeWidth="1" fill="black" />
-        <circle cx="42" cy="42" r="9" stroke="white" strokeWidth="0" fill="white" fillOpacity="0.8"/>
-    </svg>
+    componentDidMount() {
+        this.timerID = setInterval(
+            () => this.tick(),
+            Math.floor(Math.random() * (1010 - 990 + 1) + 990)
+          );
     }
-    function rem(){
-        return drawAt(rando(),rando())
+  
+    componentWillUnmount() {
+        clearInterval(this.timerID);
     }
 
-    const element = (
-        rem()
-      );
-      
-      React.useEffect(() => {
-        // useRef returns a mutable ref object whose .current property is initialized to the passed argument (initialValue).
-        const eyeNode = eyeRef.current;
-        // The returned object will persist for the full lifetime of the component.
- 
-        // Initiating VanillaTilt and passing tiltNode and vanillaTiltOptions
-        //VanillaTilt.init(tiltNode, vanillaTiltOptions);
-        return () => {
-          // ensuring that any node refs in memory get garbage collected
-          // prevent memory leaks
-          //tiltNode.vanillaTilt.destroy();
-        };
-        // adding a dependencies array, to avoid multiple renders
-      }, []);
+    tick() {
+        this.setState({
+            x: this.rando(),
+            y: this.rando()
+        });
+      }
+    
+    rando(){
+        const min = -9;
+        const max = 9;
 
-    //setInterval(rem, 1000);
+        function Offset(n){
+            return 50 + n;
+        }
+        return Offset(Math.floor(Math.random() * (max - min + 1) + min))
+      }
 
-    return element
-}
+    render() {
+
+      return (<svg  height="100" width="100">
+                <circle cx="50" cy="50" r="40" stroke="black" strokeWidth="3" fill="white" />
+                <ellipse cx={this.state.x} cy={this.state.y} rx="20" ry="20" stroke="black" strokeWidth="1" fill="red" />
+                <ellipse cx={this.state.x} cy={this.state.y}  rx="10" ry="10" stroke="black" strokeWidth="1" fill="black" />
+                <circle cx="42" cy="42" r="9" stroke="white" strokeWidth="0" fill="white" fillOpacity="0.8"/>
+            </svg>)
+        }
+    }
 
 export default Eyeball;

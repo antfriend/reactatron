@@ -6,10 +6,10 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-      <Eyeball id="eye1"></Eyeball>
+        <Eyeball />
 
       </header>
-      <Eyeball id="eye1"></Eyeball>
+      <Eyeball />
     </div>
   );
 }
