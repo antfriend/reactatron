@@ -5,10 +5,9 @@ import React from 'react';
 
 class Eyeball extends React.Component {
      
-
     constructor(props) {
         super(props)
-        
+
         this.state = {
             x: this.rando(),
             y: this.rando()
@@ -18,7 +17,7 @@ class Eyeball extends React.Component {
     componentDidMount() {
         this.timerID = setInterval(
             () => this.tick(),
-            Math.floor(Math.random() * (1010 - 990 + 1) + 990)
+            Math.floor(Math.random() * (1100 - 900 + 1) + 900)
           );
     }
   
@@ -44,13 +43,12 @@ class Eyeball extends React.Component {
       }
 
     render() {
-
-      return (<svg  height="100" width="100">
+      return (<div style={this.props.style}><svg  height="100" width="100">
                 <circle cx="50" cy="50" r="40" stroke="black" strokeWidth="3" fill="white" />
                 <ellipse cx={this.state.x} cy={this.state.y} rx="20" ry="20" stroke="black" strokeWidth="1" fill="red" />
                 <ellipse cx={this.state.x} cy={this.state.y}  rx="10" ry="10" stroke="black" strokeWidth="1" fill="black" />
                 <circle cx="42" cy="42" r="9" stroke="white" strokeWidth="0" fill="white" fillOpacity="0.8"/>
-            </svg>)
+            </svg></div>)
         }
     }
 
