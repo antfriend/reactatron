@@ -17,7 +17,7 @@ function RandomlyPlacedEyeball(props){
 function RandomlyPlacedEyeballs(props){
   var cards = [];
   for (var i = 0; i < 10; i++) {
-      cards[i] = (<RandomlyPlacedEyeball/>);
+      cards[i] = (<RandomlyPlacedEyeball key={"eye"+i} />);
   }
   return cards
 }
