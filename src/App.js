@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import Eyeball from 'react-eyeball';
+import Eyeball from './Eyeball';
 
 function randoX(){
   return Math.floor(Math.random() * (1000 - 10 + 1) + 10)
@@ -11,12 +11,16 @@ function randoY(){
 }
 
 function RandomlyPlacedEyeball(props){
-  return (<Eyeball style={{position: 'absolute',top: randoY()+'px',left: randoX()+'px'}} />)
+  return (<Eyeball style={{
+      position: 'absolute',
+      top: randoY()+'px',
+      left: randoX()+'px'
+    }} />)
 }
 
 function RandomlyPlacedEyeballs(props){
   var cards = [];
-  for (var i = 0; i < 100; i++) {
+  for (var i = 0; i < 10; i++) {
       cards[i] = (<RandomlyPlacedEyeball key={"eye"+i} />);
   }
   return cards
@@ -30,7 +34,6 @@ function App() {
       <RandomlyPlacedEyeball/>
       <RandomlyPlacedEyeballs/>
       </header>
-      
     </div>
   );
 }
